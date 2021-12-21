@@ -10,7 +10,7 @@
 \RequirePackage{titlesec}  % customize the section headings
 \RequirePackage{tabularx}
 \RequirePackage{ltablex}
-\RequirePackage{changepage}
+\RequirePackage[strict]{changepage}
 \RequirePackage{unicode-math}
 \RequirePackage{fontspec}
 \RequirePackage[
@@ -39,13 +39,7 @@
 
 \setlength{\parindent}{0in}
 
-\newenvironment{halfinch}{%
-  \begin{adjustwidth}{0.5in}{}
-  }{%
-  \end{adjustwidth}
-}
-
-% taken from stackexchange
+% Reverse bibliography numbering. Taken from stackexchange.
 % Count total number of entries in each refsection
 \AtDataInput{%
   \csnumgdef{entrycount:\therefsection}{%
@@ -56,3 +50,19 @@
 \DeclareFieldFormat{labelnumber}{\mkbibdesc{#1}}    
 \newrobustcmd*{\mkbibdesc}[1]{%
   \number\numexpr\csuse{entrycount:\therefsection}+1-#1\relax}
+
+\defbibenvironment{bibliography}
+  {\list
+     {\printtext[labelnumberwidth]{%
+        \printfield{prefixnumber}
+        \printfield{labelnumber}}}
+     {% add indentation to citations
+      \setlength{\labelwidth}{\dimexpr\labelnumberwidth+0.5in}
+      \setlength{\leftmargin}{\labelwidth}
+      \setlength{\labelsep}{\biblabelsep}
+      \addtolength{\leftmargin}{\labelsep}
+      \setlength{\itemsep}{\bibitemsep}
+      \setlength{\parsep}{\bibparsep}}
+      \renewcommand*{\makelabel}[1]{\hss##1}}
+  {\endlist}
+  {\item}
