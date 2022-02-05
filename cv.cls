@@ -1,8 +1,8 @@
 %% cv.cls
-%% last modified on 12/19/2021
+%% last modified on 02/05/2022
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{cv}[2021/12/19 CV LaTeX class]
+\ProvidesClass{cv}[2022/02/05 CV LaTeX class]
 \LoadClass[letterpaper,11pt]{article}
 
 \RequirePackage[margin=1in]{geometry}
@@ -10,6 +10,7 @@
 \RequirePackage{titlesec}  % customize the section headings
 \RequirePackage{tabularx}
 \RequirePackage{ltablex}
+\RequirePackage{environ}
 \RequirePackage[strict]{changepage}
 \RequirePackage{unicode-math}
 \RequirePackage{fontspec}
@@ -22,6 +23,7 @@
   biblabel=brackets,
   pageranges=false,
 ]{biblatex}
+
 
 \setmathfont[Scale=1]{STIXTwoMath-Regular}
 \setmainfont[
@@ -39,6 +41,14 @@
 
 \setlength{\parindent}{0in}
 
+\RenewEnviron{table}[1]{%
+  \vspace{-1.5em}
+  \begin{tabularx}{\textwidth}{@{\hspace*{\leftmargin}}#1}
+  \BODY
+  \end{tabularx}
+  \vspace{-2.5em}
+}
+
 % Reverse bibliography numbering. Taken from stackexchange.
 % Count total number of entries in each refsection
 \AtDataInput{%
@@ -53,9 +63,7 @@
 
 \defbibenvironment{bibliography}
   {\list
-     {\printtext[labelnumberwidth]{%
-        \printfield{prefixnumber}
-        \printfield{labelnumber}}}
+     {\printtext[labelnumberwidth]{\printfield{labelnumber}}}
      {% add indentation to citations
       \setlength{\labelwidth}{\dimexpr\labelnumberwidth+0.5in}
       \setlength{\leftmargin}{\labelwidth}
