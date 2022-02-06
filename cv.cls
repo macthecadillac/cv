@@ -11,6 +11,7 @@
 \RequirePackage{tabularx}
 \RequirePackage{ltablex}
 \RequirePackage{environ}
+\RequirePackage{ifthen}
 \RequirePackage[strict]{changepage}
 \RequirePackage{unicode-math}
 \RequirePackage{fontspec}
@@ -23,7 +24,6 @@
   biblabel=brackets,
   pageranges=false,
 ]{biblatex}
-
 
 \setmathfont[Scale=1]{STIXTwoMath-Regular}
 \setmainfont[
@@ -41,12 +41,31 @@
 
 \setlength{\parindent}{0in}
 
-\RenewEnviron{table}[1]{%
+\newcommand{\ranged}[4]{%
+  \ifthenelse{\equal{#4}{}}
+    {#1 -- #2 & #3 \\}
+    {#1 -- #2 & #3 \\ & #4 \\}
+}
+
+\newcommand{\dated}[3]{%
+  \ifthenelse{\equal{#3}{}}
+    {#1 & #2 \\}
+    {#1 & #2 \\ & #3 \\}
+}
+
+\NewEnviron{entries}{%
   \vspace{-1.5em}
-  \begin{tabularx}{\textwidth}{@{\hspace*{\leftmargin}}#1}
+  \begin{tabularx}{\textwidth}{@{\hspace*{\leftmargin}}lX}
   \BODY
   \end{tabularx}
   \vspace{-2.5em}
+}
+
+\NewEnviron{block}[1]{%
+  \section*{#1}
+  \begin{adjustwidth}{0.5in}{}
+  \BODY
+  \end{adjustwidth}
 }
 
 % Reverse bibliography numbering. Taken from stackexchange.
