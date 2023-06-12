@@ -1,8 +1,8 @@
 %% cv.cls
-%% last modified on 02/05/2022
+%% last modified on 02/18/2022
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{cv}[2022/02/05 CV LaTeX class]
+\ProvidesClass{cv}[2022/02/18 CV LaTeX class]
 \LoadClass[letterpaper,11pt]{article}
 
 \RequirePackage[margin=1in]{geometry}
@@ -33,6 +33,9 @@
   BoldItalicFont={*-BoldItalic},
   Ligatures=TeX
 ]{STIXTwoText}
+
+\usepackage[varqu,varl]{zi4} % inconsolata
+\setmonofont[StylisticSet=2]{Inconsolatazi4}
 
 % custom formatting for section titles
 \titleformat{\section}{\normalfont\bfseries}{\thesection}{1em}{\MakeUppercase}
