@@ -25,8 +25,12 @@
   pageranges=false,
 ]{biblatex}
 
-\setmathfont[Scale=1]{STIXTwoMath-Regular}
+\setmathfont[
+  Scale=1,
+  Path=fonts/
+]{STIXTwoMath-Regular}
 \setmainfont[
+  Path=fonts/,
   UprightFont={*-Regular},
   BoldFont={*-Bold},
   ItalicFont={*-Italic},
@@ -34,8 +38,12 @@
   Ligatures=TeX
 ]{STIXTwoText}
 
-\usepackage[varqu,varl]{zi4} % inconsolata
-\setmonofont[StylisticSet=2]{Inconsolatazi4}
+\setmonofont[
+  Path=fonts/,
+  UprightFont={*-Regular},
+  BoldFont={*-Bold},
+  StylisticSet=2
+]{Inconsolata}
 
 % custom formatting for section titles
 \titleformat{\section}{\normalfont\bfseries}{\thesection}{1em}{\MakeUppercase}
