@@ -3,7 +3,8 @@
 % \pagenumbering{gobble}
 % \newfontfamily\myfont{Times New Roman}
 
-\addbibresource[label=papers]{papers.bib}
+\addbibresource[label=peer-reviewed]{peer-reviewed.bib}
+\addbibresource[label=submitted]{submitted.bib}
 \addbibresource[label=talks]{talks.bib}
 
 \begin{document}
@@ -88,9 +89,14 @@
   RHEL derivatives.
 \end{block}
 
-\begin{refsection}[papers]
+\begin{refsection}[peer-reviewed]
   \nocite{*}
-  \printbibliography[title=Publications]
+  \printbibliography[title=Peer Reviewed Publications]
+\end{refsection}
+
+\begin{refsection}[submitted]
+  \nocite{*}
+  \printbibliography[title=Publications Under Review]
 \end{refsection}
 
 \begin{refsection}[talks]
