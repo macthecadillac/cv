@@ -17,12 +17,11 @@
 \RequirePackage{fontspec}
 \RequirePackage[
   backend=biber,
-  style=numeric,
-  sorting=ydnt,
-  defernumbers=true,
   style=phys,
   biblabel=brackets,
   pageranges=false,
+  sorting=ydnt,
+  defernumbers=true,
 ]{biblatex}
 
 \setmathfont[
