@@ -20,7 +20,7 @@
   style=phys,
   biblabel=brackets,
   pageranges=false,
-  sorting=ydnt,
+  sorting=descending-date,
   defernumbers=true,
 ]{biblatex}
 
@@ -86,7 +86,7 @@
 
 % Print the labelnumber as the total number of entries in the
 % current refsection, minus the actual labelnumber, plus one
-\DeclareFieldFormat{labelnumber}{\mkbibdesc{#1}}    
+\DeclareFieldFormat{labelnumber}{\mkbibdesc{#1}}
 \newrobustcmd*{\mkbibdesc}[1]{%
   \number\numexpr\csuse{entrycount:\therefsection}+1-#1\relax}
 
@@ -103,3 +103,14 @@
       \renewcommand*{\makelabel}[1]{\hss##1}}
   {\endlist}
   {\item}
+
+% Define a custom sorting template
+\DeclareSortingTemplate{descending-date}{
+  \sort{\field{presort}}
+  \sort[final]{\field{sortkey}}
+  \sort[direction=descending]{\field{eventyear}\field{year}}
+  \sort[direction=descending]{\field{eventmonth}\field{month}}
+  \sort[direction=descending]{\field{eventday}\field{day}}
+  \sort{\field{name}}
+  \sort{\field{title}}
+}
