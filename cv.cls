@@ -11,6 +11,7 @@
 \RequirePackage{tabularx}
 \RequirePackage{ltablex}
 \RequirePackage{environ}
+\RequirePackage{etoolbox}
 \RequirePackage{ifthen}
 \RequirePackage[strict]{changepage}
 \RequirePackage{unicode-math}
@@ -51,21 +52,33 @@
 
 \setlength{\parindent}{0in}
 
+\newcommand{\fullrow}[1]{%
+  \multicolumn{2}{@{\hspace*{\leftmargin}}l@{}}{%
+    \parbox[t]{\dimexpr\textwidth-\leftmargin\relax}{#1}%
+  }%
+}
+
 \newcommand{\ranged}[4]{%
-  \ifthenelse{\equal{#4}{}}
-    {#1 -- #2 & #3 \\}
-    {#1 -- #2 & #3 \\ & #4 \\}
+  \ifblank{#4}
+    {#3 & #1 -- #2 \\}
+    {#3 & #1 -- #2 \\ \fullrow{#4} \\}
 }
 
 \newcommand{\dated}[3]{%
-  \ifthenelse{\equal{#3}{}}
-    {#1 & #2 \\}
-    {#1 & #2 \\ & #3 \\}
+  \ifblank{#3}
+    {#2 & #1 \\}
+    {#2 & #1 \\ \fullrow{#3} \\}
 }
 
-\NewEnviron{entries}{%
+\newcommand{\degree}[4]{%
+  #1 & #2 \\[-4pt]
+  \fullrow{#3\ifblank{#4}{}{\\#4}} \\
+  \noalign{\vskip 8pt}
+}
+
+\NewEnviron{entries}[1]{%
   \vspace{-1.5em}
-  \begin{tabularx}{\textwidth}{@{\hspace*{\leftmargin}}lX}
+  \begin{tabularx}{\textwidth}{@{\hspace*{\leftmargin}}X>{\raggedleft\arraybackslash}p{#1}@{}}
   \BODY
   \end{tabularx}
   \vspace{-2.5em}
@@ -73,7 +86,7 @@
 
 \NewEnviron{block}[1]{%
   \section*{#1}
-  \begin{adjustwidth}{0.5in}{}
+  \begin{adjustwidth}{0.2in}{}
   \BODY
   \end{adjustwidth}
 }
@@ -94,7 +107,7 @@
   {\list
      {\printtext[labelnumberwidth]{\printfield{labelnumber}}}
      {% add indentation to citations
-      \setlength{\labelwidth}{\dimexpr\labelnumberwidth+0.5in}
+      \setlength{\labelwidth}{\dimexpr\labelnumberwidth+0.2in}
       \setlength{\leftmargin}{\labelwidth}
       \setlength{\labelsep}{\biblabelsep}
       \addtolength{\leftmargin}{\labelsep}
