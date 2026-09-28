@@ -28,20 +28,20 @@
 \setmathfont[
   Scale=1,
   Path=fonts/
-]{STIXTwoMath-Regular}
+]{STIXTwoMath-Regular.otf}
 \setmainfont[
   Path=fonts/,
-  UprightFont={*-Regular},
-  BoldFont={*-Bold},
-  ItalicFont={*-Italic},
-  BoldItalicFont={*-BoldItalic},
+  UprightFont={*-Regular.otf},
+  BoldFont={*-Bold.otf},
+  ItalicFont={*-Italic.otf},
+  BoldItalicFont={*-BoldItalic.otf},
   Ligatures=TeX
 ]{STIXTwoText}
 
 \setmonofont[
   Path=fonts/,
-  UprightFont={*-Regular},
-  BoldFont={*-Bold},
+  UprightFont={*-Regular.ttf},
+  BoldFont={*-Bold.ttf},
   StylisticSet=2
 ]{Inconsolata}
 

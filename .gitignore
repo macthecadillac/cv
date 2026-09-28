@@ -10,3 +10,4 @@
 .stignore
 *.xdv
 *.synctex*
+*.bbl-SAVE-ERROR
